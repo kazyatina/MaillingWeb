@@ -1,0 +1,18 @@
+{%extends 'mail/base.html'%}
+{%block content%}
+<div class="container mt-5">
+    <div class="bd-example m-0 border-0">
+        <div class="card" style="width: 50rem;">
+            <div class="card-body">
+                <h5 class="card-title">Удалить рассылку?</h5>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <button class="btn active btn-danger" type="submit">Удалить</button>
+                    <a class="btn active" type="submit" href="{% url 'mail:mailing' %}">Отменить</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

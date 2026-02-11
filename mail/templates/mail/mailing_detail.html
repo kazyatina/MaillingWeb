@@ -1,0 +1,45 @@
+{%extends 'mail/base.html'%}
+{% load static %}
+{%load my_tags%}
+
+{%block content%}
+<div class="container mt-5">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h3>Информация о рассылке</h3>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">ID рассылки: {{ object.id }}</li>
+        <li class="list-group-item">Название: {{object.name}}</li>
+        <li class="list-group-item">Дата и время начала рассылки: {{object.start_time}}</li>
+        <li class="list-group-item">Дата и время окончания отправки: {{object.end_time}}</li>
+        <li class="list-group-item">Статус: {{object.status}}</li>
+        <li class="list-group-item">Сообщение: {{object.message}}</li>
+        <li class="list-group-item">Получатели: {{ client_names }}</li>
+        <li class="list-group-item">Активность: {{object.status_active}}</li>
+        <p></p>
+        <form method="post">
+            {% csrf_token %}
+            <button class="btn btn-success col-3 mt-2" type="submit" name="send_mailing_to_clients">Запустить рассылку
+            </button>
+        </form>
+        <div class="btn-group-vertical col-3 mt-2" role="group" aria-label="Vertical button group">
+            <p></p>
+            <a type="button" href="{% url 'mail:update_mailing' object.pk %}" class="btn btn-warning">Редактировать</a>
+            <p></p>
+            <a type="button" href="{% url 'mail:delete_mailing' object.pk %}" class="btn btn-danger">Удалить</a>
+        </div>
+        <div class="btn-group-vertical col-3 mt-2" role="group" aria-label="Vertical button group">
+            {% if perms.mail.can_deactivate_mailing or request.user.is_superuser %}
+            {% if object.status_active == 'active' %}
+            <a type="button" href="{% url 'mail:mailing_status' object.pk %}" class="btn btn-secondary">Отключить</a>
+            {% endif %}
+            {% if object.status_active == 'inactive' %}
+            <a type="button" href="{% url 'mail:mailing_status' object.pk %}" class="btn btn-info">Включить</a>
+            {% endif %}
+            {% endif %}
+        </div>
+    </ul>
+
+</div>
+{%endblock%}
+

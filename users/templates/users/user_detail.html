@@ -1,0 +1,38 @@
+{%extends 'mail/base.html'%}
+{% load static %}
+{%load my_tags%}
+{% block title %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h3>Информация о пользователе</h3>
+</div>
+{% endblock %}
+{%block content%}
+<div class="container mt-5">
+
+    <ul class="list-group list-group-flush">
+        <div class="card mb-4 rounded-3 shadow-sm" style="width: 18rem;">
+            <img src="{{object.avatar| media_filter}}" class="img-thumbnail" alt="{{ object.name }}">
+        </div>
+        <li class="list-group-item">ID клиента: {{ object.id }}</li>
+        <li class="list-group-item">Ник клиента: {{object.username}}</li>
+        <li class="list-group-item">Почта клиента: {{object.email}}</li>
+        <li class="list-group-item">Телефон: {{object.phone_number}}</li>
+        <li class="list-group-item">Страна: {{object.country}}</li>
+        <div class="btn-group-vertical col-3 mt-2" role="group" aria-label="Vertical button group">
+            <a type="button" href="{% url 'users:user_update' object.pk %}" class="btn btn-warning">Редактировать</a>
+            <p></p>
+        </div>
+        {% if object.is_block %}
+        <p>Статус: <strong style="color: red;">Заблокирован</strong></p>
+        {% else %}
+        <p>Статус: <strong style="color: green;">Активен </strong></p>
+        {% endif %}
+    </ul>
+    {% if object.is_block %}
+    <a href="{% url 'users:user_block' object.pk %}" class="btn btn-success col-3 mt-2">Разблокировать</a>
+    {% else %}
+    <a href="{% url 'users:user_block' object.pk %}" class="btn btn-danger col-3 mt-2">Заблокировать</a>
+    {% endif %}
+</div>
+
+{%endblock%}

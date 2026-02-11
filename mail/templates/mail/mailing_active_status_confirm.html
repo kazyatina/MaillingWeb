@@ -1,0 +1,22 @@
+{%extends 'mail/base.html'%}
+{% load static %}
+{%load my_tags%}
+
+{%block content%}
+<div class="container mt-5">
+    <h1>Подтвердите изменение статуса рассылки</h1>
+
+    <p>
+        Вы хотите {{new_status }} рассылку "{{ mailing.message.theme }}".
+    </p>
+    <p>
+        Текущий статус рассылки: {{ current_status }}.
+    </p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Подтвердить</button>
+        <a href="{% url 'mail:mailing' %}" class="btn btn-secondary">Отмена</a>
+    </form>
+</div>
+{%endblock%}

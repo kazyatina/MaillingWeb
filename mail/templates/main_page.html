@@ -1,0 +1,73 @@
+{%extends 'mail/base.html'%}
+{% load static %}
+{%load my_tags%}
+{%block content%}
+
+<main>
+    <div class="container">
+        <div class="pricing-header p-3 pb-md-4 mx-auto text-center"><h1 class="display-4 fw-normal text-body-emphasis">
+            Сервис рассылок</h1>
+            <p class="fs-5 text-body-secondary">Веб-приложение позволяет пользователям управлять рассылками сообщений
+                для клиентов</p></div>
+        {% if user.is_block %}
+        <div class="pricing-header p-3 pb-md-4 mx-auto text-center"><h1 class="display-4 fw-normal text-body-emphasis">
+            Вы заблокированы админом и не можете пользоваться сервисом</h1>
+            {% else %}
+            <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3">
+                            <h4 class="my-0 fw-normal">Общее количество всех созданных рассылок</h4>
+                        </div>
+                        <div class="card-body"><h1 class="card-title pricing-card-title">{{ count_mailing }}<small
+                                class="text-body-secondary fw-light">/рассылок</small></h1>
+                            {% if user.is_authenticated %}
+                            <a class="w-100 btn btn-lg btn-primary text-white cursor-pointer" id="btn_create_recipient"
+                               href="{% url 'mail:create_mailing' %}">Создать рассылку</a>
+                            {% else %}
+                            <button type="button" class="w-100 btn btn-lg btn-primary">Вход</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3">
+                            <h4 class="my-0 fw-normal">Количество активных рассылок</h4>
+                        </div>
+                        <div class="card-body"><h1 class="card-title pricing-card-title">{{ count_active_mailing}}<small
+                                    class="text-body-secondary fw-light">/рассылок активны</small></h1>
+                            {% if user.is_authenticated %}
+                            <a class="w-100 btn btn-lg btn-primary text-white cursor-pointer"
+                               href="#">Рассылки</a>
+                            {% else %}
+                            <button type="button" class="w-100 btn btn-lg btn-primary">Вход</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card mb-4 rounded-3 shadow-sm border-primary">
+                        <div class="card-header py-3 text-bg-primary border-primary">
+                            <h4 class="my-0 fw-normal">Количество уникальных получателей</h4>
+                        </div>
+                        <div class="card-body"><h1 class="card-title pricing-card-title">{{ count_clients }}<small
+                                class="text-body-secondary fw-light">/человек</small></h1>
+                            {% if user.is_authenticated %}
+                            <a class="w-100 btn btn-lg btn-primary text-white cursor-pointer"
+                               href="{% url 'mail:client_create' %}">Добавить получателя</a>
+                            {% else %}
+                            <button type="button" class="w-100 btn btn-lg btn-primary">Вход</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+</main>
+<script src="/docs/5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        class="astro-vvvwv3sm">
+</script>
+{%endblock%}

@@ -1,0 +1,11 @@
+{%extends 'mail/base.html'%}
+{%block content%}
+<div class="container mt-5">
+    <p>Заблокировать пользователя {{object.username}}?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Подтвердить</button>
+        <a href="{% url 'users:users_list' %}" class="btn btn-secondary">Отмена</a>
+    </form>
+</div>
+{%endblock%}
