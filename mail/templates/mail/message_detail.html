@@ -1,0 +1,30 @@
+{%extends 'mail/base.html'%}
+{% load static %}
+{%load my_tags%}
+{%block content%}
+<div class="container mt-5">
+    <div class="card">
+        <div>
+            <form>
+                <div class="list-group">
+                    <a href="#"
+                       class="list-group-item list-group-item-action active" aria-current="true">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">{{ object.theme }}</h5>
+                        </div>
+                    </a>
+                </div>
+                <div class="mb-3">
+                    <small>{{ object.created_at }}</small>
+                </div>
+                <div class="mb-3">
+                    <p class="mb-1">{{ object.text }}</p>
+                </div>
+                <a class="btn btn-warning " href="{% url 'mail:update_message' object.pk %}"
+                   role="button">Редактировать</a>
+                <a class="btn btn-danger " href="{% url 'mail:delete_message' object.pk %}" role="button">Удалить</a>
+            </form>
+        </div>
+    </div>
+</div>
+{%endblock%}

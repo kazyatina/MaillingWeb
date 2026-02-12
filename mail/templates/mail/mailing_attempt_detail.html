@@ -1,0 +1,27 @@
+{%extends 'mail/base.html'%}
+{% load static %}
+{%load my_tags%}
+{% block content %}
+<div class="container">
+    <div class="row text-center">
+        <div class="col-12">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h5 class="my-0 font-weight-normal product-name-area ">{{object.attempt_time}}</h5>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title"></h1>
+
+                    <p><strong>Статус:</strong> {{ object.status }}</p>
+                    <p><strong>Ответ почтового сервера:</strong> {{object.server_response}}</p>
+                    <p><strong>Тема письма:</strong> {{object.mailing.message.theme}}</p>
+                    <p><strong>Количество получателей:</strong> {{object.mailing.clients.count }}</p>
+
+                    <a class="btn btn-primary" href="{% url 'mail:mailing_attempts_list' %}" role="button">Назад</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

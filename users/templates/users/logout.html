@@ -1,0 +1,11 @@
+{%extends 'mail/base.html'%}
+{%block content%}
+
+<h2>Вы успешно вышли из системы</h2>
+<form method="post" action="{% url 'users:logout' %}">
+    {% csrf_token %}
+    <button type="submit" class="text-black">Выйти</button>
+</form>
+<p>Спасибо, что были с нами!</p>
+
+{%endblock%}

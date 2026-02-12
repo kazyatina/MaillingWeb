@@ -1,0 +1,48 @@
+{%extends 'mail/base.html'%}
+{% load static %}
+{%load my_tags%}
+{% block content %}
+
+{% if mailing_attempts  %}
+<div class="container">
+    <div class="row text-center">
+        <div class="col-3">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h5 class="my-0 font-weight-normal product-name-area ">Рассылки</h5>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title"></h1>
+                    <ul class="list-unstyled mt-3 mb-5 text-start m-3">
+                        <li class="mb-5"> Успешно: {{count_successful}}</li>
+                        <li class="mb-5"> Не успешно: {{count_failed}}</li>
+                        <li class="mb-5"> Всего: {{count_all}}</li>
+                    </ul>
+                    <a class="btn btn-primary" href="{% url 'mail:mailing_attempts_list' %}"
+                       role="button">Назад</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h5 class="my-0 font-weight-normal product-name-area ">Сообщения</h5>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title"></h1>
+                    <ul class="list-unstyled mt-3 mb-5 text-start m-3">
+                        <li class="mb-5"> Всего: {{count_all}}</li>
+                    </ul>
+                    <a class="btn btn-primary" href="{% url 'mail:mailing_attempts_list' %}"
+                       role="button">Назад</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="container">
+    Пока нет статистики отправки.
+</div>
+{% endif %}
+{% endblock %}

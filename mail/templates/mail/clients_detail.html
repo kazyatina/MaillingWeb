@@ -1,0 +1,23 @@
+{%extends 'mail/base.html'%}
+{% load static %}
+{%load my_tags%}
+{% block title %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h3>Информация о клиенте</h3>
+</div>
+{% endblock %}
+{%block content%}
+<div class="container mt-5">
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">ID клиента: {{ object.id }}</li>
+        <li class="list-group-item">Имя клиента: {{object.name}}</li>
+        <li class="list-group-item">Почта клиента: {{object.email}}</li>
+        <li class="list-group-item">Комментарий: {{object.comment}}</li>
+        <div class="btn-group-vertical col-3 mt-2" role="group" aria-label="Vertical button group">
+            <a type="button" href="{% url 'mail:client_update' object.pk %}" class="btn btn-warning">Редактировать</a>
+            <p></p>
+            <a type="button" href="{% url 'mail:client_delete' object.pk %}" class="btn btn-danger">Удалить</a>
+        </div>
+    </ul>
+</div>
+{%endblock%}

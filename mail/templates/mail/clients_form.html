@@ -1,0 +1,26 @@
+{%extends 'mail/base.html'%}
+{%block content%}
+{% if user == object.owner%}
+<div class="container mt-5">
+    <div class="bd-example m-0 border-0">
+        <div class="card" style="width: 50rem;">
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+                    {{ form.as_p }}
+
+                    <button class="btn active btn-primary text-white cursor-pointer" type="submit">
+                        {% if object %}
+                        Сохранить
+                        {% else %}
+                        Создать
+                        {% endif %}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{%endblock%}

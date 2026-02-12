@@ -29,8 +29,8 @@ ___
 - poetry add ipython - для poetry
 - python manage.py shell -i ipython - запустите Django shell с IPython
 - Для выхода из Django Shell используйте команды exit(), quit() или сочетание клавиш Ctrl + D или Ctrl + Z
-- python -Xutf8 manage.py dumpdata [приложение].[модель] --output [файл.json] --indent 4 - Базовая команда для экспорта данных модели в файл
-- python manage.py loaddata файл.json --format json - Загрузка данных с указанием формата файла на Windows
+- python -Xutf8 manage.py dumpdata [приложение].[модель] --output [файл.json] --indent 4 - Выгрузка данных из БД в файл на Windows
+- python manage.py loaddata файл.json --format json - Загрузка данных из файла в БД с указанием формата файла на Windows
 - python manage.py команда - Вызов кастомной команды
 ___
 ## Создание и настройка приложения `mail`:

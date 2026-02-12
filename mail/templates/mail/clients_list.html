@@ -1,0 +1,32 @@
+{%extends 'mail/base.html'%}
+{% load static %}
+{%load my_tags%}
+{%block content%}
+<div class="container">
+    <div class="card">
+        <div class="card-header align-items-center">
+            <div class="navbar-nav-right d-flex align-items-center justify-content-end">
+                <a class="btn btn-primary text-white cursor-pointer" id="btn_create_recipient"
+                   href="{% url 'mail:client_create' %}">
+                    Добавить получателя</a>
+            </div>
+            <h5 class="card-action-title mb-5">Получатели({{ object_list|length }})</h5>
+        </div>
+        <div>
+            {% for recipient in object_list %}
+            <div class="list-group">
+                <a href="{% url 'mail:client_detail' recipient.pk %}" class="list-group-item list-group-item-action"
+                   aria-current="true">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-2">{{ recipient.name }}</h5>
+                        <small>ID: {{ recipient.id }}</small>
+                    </div>
+                    <p class="mb-1">Нажмите для просмотра</p>
+                </a>
+                <p></p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{%endblock%}
